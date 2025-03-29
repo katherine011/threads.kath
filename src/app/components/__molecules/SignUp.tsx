@@ -2,9 +2,6 @@ import React from "react";
 import Input from "../__atoms/Input";
 import Button from "../__atoms/Button";
 import Link from "next/link";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
 
 const SignUp = () => {
   return (

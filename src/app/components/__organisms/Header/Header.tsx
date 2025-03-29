@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import Icons1 from "../../../../icons/threadsic.png";
-import HomeFilledIcon from "@mui/icons-material/HomeFilled";
 import HomeButton, { BottomButton } from "../../__atoms/HomeButton";
 
 const Header = () => {
