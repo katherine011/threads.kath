@@ -13,6 +13,7 @@ const Page = () => {
         width={500}
         height={500}
         className="w-[100%] h-[200px] absolute top-0 z-10"
+        priority
       />
       <SignUp />
       <Privace />

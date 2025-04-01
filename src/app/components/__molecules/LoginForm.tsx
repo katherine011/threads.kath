@@ -11,8 +11,7 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../../firebase";
-import { FirebaseError } from "firebase/app";
-import { getAuth, fetchSignInMethodsForEmail } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 interface FormValues {
   email: string;
@@ -35,7 +34,7 @@ const schema = yup.object().shape({
 });
 
 const LoginForm = () => {
-  const [error, setErrorMessage] = useState<string | null>(null);
+  const router = useRouter();
 
   const {
     register,
@@ -47,27 +46,16 @@ const LoginForm = () => {
 
   const onSubmit = async (data: FormValues) => {
     try {
-      const firebaseAuth = getAuth();
-
-      const methods = await fetchSignInMethodsForEmail(
-        firebaseAuth,
-        data.email
+      const UserAuth = await signInWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
       );
+      console.log(UserAuth.user);
 
-      if (methods.length === 0) {
-        setErrorMessage("account not found");
-        return;
-      }
-
-      await signInWithEmailAndPassword(firebaseAuth, data.email, data.password);
+      router.push("/");
     } catch (error: unknown) {
-      if (error instanceof FirebaseError) {
-        if (error.code === "auth/wrong-password") {
-          setErrorMessage("wrong password, try again.");
-        } else {
-          setErrorMessage("something went wrong, please try again!");
-        }
-      }
+      console.log(error);
     }
   };
 
@@ -94,10 +82,11 @@ const LoginForm = () => {
         />
         <Button button="Log in" type="submit" />
       </form>
+
       <p className="text-[#999999] mb-5 mt-3 cursor-pointer">
         Forgotten password?
       </p>
-      <p className="text-[#999999]">— ‍ ‍or‍‍‍‍‍‍ ‍ ‍ ‍—</p>
+      <p className="text-[#999999]">— or —</p>
       <Link href={"/register"}>
         <div className="w-[370px] h-[86px] rounded-[14px] outline-1 border mt-5 p-5 pl-9 flex flex-row items-center cursor-pointer">
           <Image

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Header from "./components/__organisms/Header/Header";
 
 const inter = Inter({
   subsets: ["greek"],
@@ -22,7 +23,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} antialiased`}>{children}</body>
+      <body
+        className={`${inter.className} antialiased flex flex-row bg-[#F2F3F5]   `}
+      >
+        <Header /> {children}
+      </body>
     </html>
   );
 }
