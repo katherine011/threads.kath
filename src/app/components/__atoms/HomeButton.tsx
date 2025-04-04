@@ -1,9 +1,11 @@
+"use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
 
 const HomeButton = () => {
   const pathname = usePathname();
+
   return (
     <div>
       <div className="flex flex-col justify-between items-center h-[270px] mt-14">

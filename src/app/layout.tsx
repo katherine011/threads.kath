@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "./components/__organisms/Header/Header";
+import Header from "./components/__organisms/Header";
 
 const inter = Inter({
   subsets: ["greek"],

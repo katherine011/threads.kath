@@ -1,8 +1,8 @@
-import SignUp from "@/app/components/__molecules/SignUp";
 import Image from "next/image";
 import React from "react";
 import Background from "../../../images/background.jpg";
 import Privace from "@/app/components/__atoms/Privace";
+import SignUp from "@/app/components/__organisms/SignUp";
 
 const Page = () => {
   return (

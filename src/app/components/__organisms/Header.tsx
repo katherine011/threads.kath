@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import React from "react";
-import Icons1 from "../../../../icons/threadsic.png";
-import HomeButton, { BottomButton } from "../../__atoms/HomeButton";
+import Icons1 from "../../../icons/threadsic.png";
 import { usePathname } from "next/navigation";
+import HomeButton, { BottomButton } from "../__atoms/HomeButton";
 
 const Header = () => {
   const path = usePathname();

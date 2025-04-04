@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import Background from "../../../images/background.jpg";
-import LoginForm from "@/app/components/__molecules/LoginForm";
 import Privace from "@/app/components/__atoms/Privace";
+import LoginForm from "@/app/components/__organisms/LoginForm";
 
 const Page = () => {
   return (
