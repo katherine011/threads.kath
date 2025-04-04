@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Image from "next/image";
 
 interface Gif {
   id: string;
@@ -34,8 +35,7 @@ const GiphyComponent: React.FC = () => {
   return (
     <div className=" gap-4 bg-white w-[200px] h-[200px] ab border-[1px] border-gray-400 p-2 flex flex-wrap">
       {gifs.map((gif) => (
-        <img
-          // src={GIF}
+        <Image
           src={gif.images.original.url}
           alt="gif"
           key={gif.id}

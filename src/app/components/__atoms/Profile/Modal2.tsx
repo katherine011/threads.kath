@@ -4,7 +4,6 @@ import { auth, db } from "@/app/firebaseConfig";
 import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from "react";
-import { Switch } from "@mui/material";
 import ToggleSwitch from "./ToggleSwitch";
 import ProfPic from "./ProfPic";
 

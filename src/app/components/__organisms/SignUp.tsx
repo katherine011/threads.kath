@@ -47,6 +47,7 @@ const schema = yup.object().shape({
 });
 
 const SignUp = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -55,8 +56,6 @@ const SignUp = () => {
     resolver: yupResolver(schema),
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-
-  const router = useRouter();
 
   const saveUserData = async (id: string, name: string, username: string) => {
     try {

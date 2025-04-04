@@ -3,7 +3,7 @@
 import { auth } from "@/app/firebaseConfig";
 import { updateProfile } from "firebase/auth";
 
-const UpdateProfPic = async (photoURL: string) => {
+const UpdateProfPic = async () => {
   if (auth.currentUser) {
     try {
       await updateProfile(auth.currentUser, {});
