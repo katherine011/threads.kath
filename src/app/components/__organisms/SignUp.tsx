@@ -86,8 +86,6 @@ const SignUp = () => {
 
       console.log("User registered:", userCredential.user);
 
-      console.log(userCredential.user);
-
       router.push("/login");
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {

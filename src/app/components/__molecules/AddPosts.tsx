@@ -76,7 +76,7 @@ const AddPosts = () => {
             height={120}
             className="w-[50px] h-[50px] rounded-full"
           />
-          <p className="text-gray-400 font-inter text-sm mt-2">What's new?</p>
+          <p className="text-gray-400 font-inter text-sm mt-2">Whats new?</p>
         </div>
         <button className="border-gray-300 border-[1px] w-[70px] h-[35px] rounded-[12px] hover:w-[72px] hover:h-[37px] bg-white">
           <h1 className="text-[#000000] text-inter text-base font-semibold">

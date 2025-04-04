@@ -8,11 +8,14 @@ import HomeButton, { BottomButton } from "../__atoms/HomeButton";
 
 const Header = () => {
   const path = usePathname();
-  console.log(path);
+  console.log("header:", path);
 
+  const isLoginPage = path === "/login" || path == "/register" ? "hidden" : "";
   return (
     <>
-      <header className="h-[100vh] w-[70px] p-3 bg-[#F2F3F5] flex flex-col justify-between items-center">
+      <header
+        className={`h-[100vh] w-[70px] p-3 ${isLoginPage} bg-[#F2F3F5] flex flex-col justify-between items-center`}
+      >
         <div>
           <Image
             src={Icons1}

@@ -75,7 +75,7 @@ const ProfPic = () => {
           alt="Profile"
           width={100}
           height={100}
-          className="w-[100px] h-[100px] rounded-full cursor-pointer"
+          className="w-[100px] h-[100px] rounded-full cursor-pointer object-cover"
           onClick={() => setIsModalOpen(!isModalOpen)}
         />
         {isModalOpen && (
