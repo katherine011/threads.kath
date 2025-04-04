@@ -14,7 +14,6 @@ const Modal2 = () => {
     name: string;
     username: string;
   } | null>(null);
-  const [loading, setLoading] = useState(true);
   const modalRef = useRef<HTMLDivElement>(null);
 
   function closeModal(event: MouseEvent) {
@@ -47,7 +46,6 @@ const Modal2 = () => {
           console.error(error);
         }
       }
-      setLoading(false);
     });
 
     return () => unsubscribe();

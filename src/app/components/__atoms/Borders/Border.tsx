@@ -23,7 +23,7 @@ const Border = ({ pagename, children, show }: Component) => {
       <div className="w-[100%] h-[60px] flex flex-row items-center justify-center gap-5">
         <p className=" text-inter text-base font-semibold">{pagename}</p>
         <button
-          onClick={(e) => setIsOpen(!isOpen)}
+          onClick={() => setIsOpen(!isOpen)}
           className="rounded-full  shadow-md w-6 h-6 border-zinc-300 outline-[2px] border-[0.5px] flex items-center justify-center cursor cursor-pointer hover:h-7 hover:w-7 hover:duration-75"
         >
           <Image
