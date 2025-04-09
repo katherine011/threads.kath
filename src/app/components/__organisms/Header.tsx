@@ -14,7 +14,7 @@ const Header = () => {
   return (
     <>
       <header
-        className={`h-[100vh] w-[70px] p-3 ${isLoginPage} bg-[#F2F3F5] flex flex-col justify-between items-center`}
+        className={`h-[100vh] fixed w-[70px] p-3 ${isLoginPage} bg-[#F2F3F5] flex flex-col justify-between items-center`}
       >
         <div>
           <Image

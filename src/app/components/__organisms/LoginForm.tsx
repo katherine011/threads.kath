@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Icon1 from "../../../icons/images.png";
 import Link from "next/link";
@@ -12,6 +12,7 @@ import { auth } from "../../../../firebase";
 import { useRouter } from "next/navigation";
 import Input from "../__atoms/Input";
 import Button from "../__atoms/Button";
+import Thread from "../../../icons/Threads.ic.png";
 
 interface FormValues {
   email: string;
@@ -35,6 +36,7 @@ const schema = yup.object().shape({
 
 const LoginForm = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -46,18 +48,27 @@ const LoginForm = () => {
 
   const onSubmit = async (data: FormValues) => {
     try {
+      setLoading(true);
       const UserAuth = await signInWithEmailAndPassword(
         auth,
         data.email,
         data.password
       );
       console.log(UserAuth.user);
-
-      router.push("/");
+      setLoading(true);
+      router.push("/home");
     } catch (error: unknown) {
       console.log(error);
     }
   };
+
+  if (loading) {
+    return (
+      <div className="w-[100%] left-0 top-0 a h-[100vh] bg-white rounded-t-3xl border shadow-md border-gray-300 outline-[2px] absolute flex items-center justify-center ">
+        <Image src={Thread} alt="Animated GIF" width={70} height={70} />
+      </div>
+    );
+  }
 
   return (
     <div className="w-[370px] h-[500px] flex flex-col items-center justify-center z-20 mt-28">

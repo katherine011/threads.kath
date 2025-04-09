@@ -13,6 +13,8 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "@/app/firebaseConfig";
 import Input from "../__atoms/Input";
 import Button from "../__atoms/Button";
+import Thread from "../../../icons/Threads.ic.png";
+import Image from "next/image";
 
 interface FormValues {
   email: string;
@@ -56,6 +58,7 @@ const SignUp = () => {
     resolver: yupResolver(schema),
   });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const saveUserData = async (id: string, name: string, username: string) => {
     try {
@@ -85,8 +88,8 @@ const SignUp = () => {
       await saveUserData(userCredential.user.uid, data.name, data.username);
 
       console.log("User registered:", userCredential.user);
-
       router.push("/login");
+      setLoading(true);
     } catch (error: unknown) {
       if (error instanceof FirebaseError) {
         console.error(error.message);
@@ -104,6 +107,14 @@ const SignUp = () => {
       }
     }
   };
+
+  if (loading) {
+    return (
+      <div className="w-[100%] left-0 top-0 a h-[100vh] bg-white rounded-t-3xl border shadow-md border-gray-300 outline-[2px] absolute flex items-center justify-center ">
+        <Image src={Thread} alt="Animated GIF" width={70} height={70} />
+      </div>
+    );
+  }
 
   return (
     <div className="z-20">

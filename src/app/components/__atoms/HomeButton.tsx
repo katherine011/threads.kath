@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import AddPosts from "../__molecules/AddPosts";
+import { useState } from "react";
+import MoreSett from "./Profile/MoreSett";
 
 const HomeButton = () => {
   const pathname = usePathname();
@@ -10,7 +13,7 @@ const HomeButton = () => {
 
   return (
     <div>
-      <div className="flex flex-col justify-between items-center h-[270px] mt-14">
+      <div className="flex flex-col relative justify-between items-center h-[270px] mt-14">
         <Link href={"/home"}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -35,10 +38,13 @@ const HomeButton = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
-            className="w-6 h-6 fill-current text-gray-400  cursor-pointer hover:text-black transition-colors duration-200"
+            className="w-6 h-6 fill-current z-30 text-gray-400  cursor-pointer hover:text-black transition-colors duration-200"
           >
             <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z" />
           </svg>
+          <div className="">
+            <AddPosts />
+          </div>
         </div>
         <Link href={"/notification"}>
           <svg
@@ -66,6 +72,8 @@ const HomeButton = () => {
 };
 
 export const BottomButton = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="flex flex-col justify-between items-center h-[70px] mb-3">
       <svg
@@ -75,13 +83,16 @@ export const BottomButton = () => {
       >
         <path d="M32 32C32 14.3 46.3 0 64 0L320 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-29.5 0 11.4 148.2c36.7 19.9 65.7 53.2 79.5 94.7l1 3c3.3 9.8 1.6 20.5-4.4 28.8s-15.7 13.3-26 13.3L32 352c-10.3 0-19.9-4.9-26-13.3s-7.7-19.1-4.4-28.8l1-3c13.8-41.5 42.8-74.8 79.5-94.7L93.5 64 64 64C46.3 64 32 49.7 32 32zM160 384l64 0 0 96c0 17.7-14.3 32-32 32s-32-14.3-32-32l0-96z" />
       </svg>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 448 512"
-        className="w-6 h-6 fill-current text-gray-400 cursor-pointer hover:text-black transition-colors duration-200"
-      >
-        <path d="M32 288c-17.7 0-32 14.3-32 32s14.3 32 32 32l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 288zm0-128c-17.7 0-32 14.3-32 32s14.3 32 32 32l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 160z" />
-      </svg>
+      <button onClick={() => setIsOpen(!isOpen)}>
+        {isOpen && <MoreSett />}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 448 512"
+          className="w-6 h-6 fill-current text-gray-400 cursor-pointer hover:text-black transition-colors duration-200"
+        >
+          <path d="M32 288c-17.7 0-32 14.3-32 32s14.3 32 32 32l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 288zm0-128c-17.7 0-32 14.3-32 32s14.3 32 32 32l384 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 160z" />
+        </svg>
+      </button>
     </div>
   );
 };
