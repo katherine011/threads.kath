@@ -5,7 +5,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from "react";
 import ToggleSwitch from "./ToggleSwitch";
-import ProfPic from "./ProfPic";
 
 const Modal2 = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -91,7 +90,6 @@ const Modal2 = () => {
                   {")"}
                 </p>
               </div>
-              <ProfPic />
             </div>
             <div className="w-[100%] h-[60px] border-b-[2px] outline-black border-gray-300 mt-5 outline-1">
               <h1 className="text-[#000000] text-inter text-base font-semibold">

@@ -27,6 +27,7 @@ const AddPosts = () => {
     username: string;
     bio?: string;
     link?: string;
+    imageUrl?: string;
   } | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -85,7 +86,7 @@ const AddPosts = () => {
         author: {
           name: userData.name,
           username: userData.username,
-          profileImage: imageUrl,
+          profileImage: userData.imageUrl || DefaultImage.src,
           bio: userData.bio || "",
           link: userData.link || "",
         },
