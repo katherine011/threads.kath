@@ -55,8 +55,8 @@ const LoginForm = () => {
         data.password
       );
       console.log(UserAuth.user);
-      setLoading(true);
       router.push("/home");
+      setLoading(true);
     } catch (error: unknown) {
       console.log(error);
     }

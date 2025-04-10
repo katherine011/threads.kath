@@ -84,10 +84,10 @@ const Modal2 = () => {
       </div>
       {isOpen && (
         <>
-          <div className="w-[2175px] z-20 h-[1571px] absolute bg-[#0000006f] left-[-800px] top-[-900px] "></div>
+          <div className="w-[2313px] z-20 h-[1640px] absolute bg-[#0000006f] left-[-800px] top-[-900px] "></div>
           <div
             ref={modalRef}
-            className="w-[580px] h-[400px] absolute p-5 z-30 top-40 left-[398px] cursor-pointer bg-white rounded-[12px] shadow-xs border shadow-md border-gray-300 outline-[2px]"
+            className="w-[580px] h-[400px] absolute p-5 z-30 top-40 left-[465px] cursor-pointer bg-white rounded-[12px] shadow-xs border shadow-md border-gray-300 outline-[2px]"
           >
             <div className="w-[100%] h-[60px] flex flex-row justify-between">
               <div className="flex flex-col w-[420px] border-b-[2px] outline-black border-gray-300 outline-1">
