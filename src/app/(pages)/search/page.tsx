@@ -1,5 +1,12 @@
-import Border2 from "@/app/components/__atoms/Borders/Border2";
-import Search from "@/app/components/__molecules/Search";
+import dynamic from "next/dynamic";
+
+const Border2 = dynamic(
+  () => import("@/app/components/__atoms/Borders/Border2"),
+  { ssr: false }
+);
+const Search = dynamic(() => import("@/app/components/__molecules/Search"), {
+  ssr: false,
+});
 import React from "react";
 
 const Page = () => {

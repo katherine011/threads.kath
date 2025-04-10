@@ -9,7 +9,15 @@ import { useSearchParams } from "next/navigation";
 import Thread from "../../../icons/Threads.ic.png";
 
 const UserProfile = () => {
-  const [user, setUser] = useState<any | null>(null);
+  interface User {
+    name: string;
+    username: string;
+    bio?: string;
+    link?: string;
+    image?: string;
+  }
+
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>("");
   const searchParams = useSearchParams();
@@ -30,12 +38,17 @@ const UserProfile = () => {
 
         if (!querySnapshot.empty) {
           const userData = querySnapshot.docs[0].data();
-          setUser(userData);
+          const mappedUser: User = {
+            name: userData.name,
+            username: userData.username,
+            bio: userData.bio,
+            link: userData.link,
+            image: userData.image,
+          };
+          setUser(mappedUser);
         } else {
           setError("მომხმარებელი არ existe");
         }
-      } catch (err: any) {
-        setError("მომხმარებლის მონაცემების მიღება ვერ მოხერხდა");
       } finally {
         setLoading(false);
       }

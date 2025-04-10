@@ -203,9 +203,11 @@ const AddPosts = () => {
                   onChange={(e) => setPostText(e.target.value)}
                 />
                 {uploadedImageUrl && (
-                  <img
+                  <Image
                     src={uploadedImageUrl}
                     alt="Uploaded image"
+                    width={30}
+                    height={30}
                     className="w-[100px] h-[100px]"
                   />
                 )}

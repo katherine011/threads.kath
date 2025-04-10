@@ -18,20 +18,20 @@ import Image from "next/image";
 import More from "../../../icons/more.png";
 import Comment from "../../../icons/comment.png";
 import DefaultImage from "../../../images/default.png";
-import { onAuthStateChanged } from "firebase/auth";
 
 interface Post {
   id: string;
   text: string;
   imageUrl: string;
-  createdAt: any;
+  // createdAt: any;
   author: {
     name: string;
     username: string;
     profileImage: string;
   };
   likes?: string[];
-  comments?: { user: string; commentText: string; createdAt: any }[];
+  comments?: { user: string; commentText: string }[];
+  content: string;
 }
 
 const PostsList = () => {
@@ -47,14 +47,9 @@ const PostsList = () => {
   } | null>(null);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [imageUrl] = useState<string | null>(null);
 
   const modalRef = useRef<HTMLDivElement>(null);
-
-  const [userData, setUserData] = useState<{
-    name: string;
-    username: string;
-  } | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -65,19 +60,6 @@ const PostsList = () => {
         setOpenPostId(null);
       }
     };
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const userDocRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(userDocRef);
-        if (docSnap.exists()) {
-          setUserData({
-            name: docSnap.data().name,
-            username: docSnap.data().username,
-          });
-          setImageUrl(docSnap.data().profileImage || DefaultImage.src);
-        }
-      }
-    });
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -256,7 +238,7 @@ const PostsList = () => {
             <p className="text-black text-sm">{post.text}</p>
             {post.imageUrl && (
               <Image
-                src={post.imageUrl}
+                src={post.imageUrl || DefaultImage}
                 alt="Post image"
                 width={500}
                 height={300}
