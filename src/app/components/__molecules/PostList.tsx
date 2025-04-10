@@ -297,7 +297,7 @@ const PostsList = () => {
             </div>
             {commentOpenPostId === post.id && (
               <>
-                <div className="w-[2175px] z-20 h-[1971px] absolute bg-[#000000ab] left-[-800px] top-[-900px] "></div>
+                <div className="w-[2313px] z-20 h-[1971px] absolute bg-[#000000ab] left-[-800px] top-[-900px] "></div>
                 <div className="absolute left-[400px] border z-30 border-gray-300 rounded-2xl shadow-lg w-[580px] h-[auto] bg-white  ">
                   <div className="w-[580px] z-40 h-[60px] pl-2 pr-2 border-b border-gray-400 flex items-center flex-row justify-between ">
                     <button

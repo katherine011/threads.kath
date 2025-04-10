@@ -6,20 +6,28 @@ import { doc, getDoc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useRef, useState } from "react";
 import ToggleSwitch from "./ToggleSwitch";
 
+interface UserData {
+  uid: string ;
+  name: string;
+  username: string;
+  bio?: string;
+  link?: string;
+}
+
 const Modal2 = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isBioOpen, setIsBioOpen] = useState(false);
   const [isLinkOpen, setIsLinkOpen] = useState(false);
   const [bioInput, setBioInput] = useState("");
   const [linkInput, setLinkInput] = useState("");
-  const [userData, setUserData] = useState<any>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
   const fetchUserData = async (uid: string) => {
     const userDocRef = doc(db, "users", uid);
     const docSnap = await getDoc(userDocRef);
     if (docSnap.exists()) {
-      setUserData(docSnap.data());
+      setUserData(docSnap.data() as UserData);
     }
   };
 
@@ -27,7 +35,7 @@ const Modal2 = () => {
     if (userData?.uid) {
       const userDocRef = doc(db, "users", userData.uid);
       await updateDoc(userDocRef, { bio: bioInput });
-      setUserData((prev: any) => ({ ...prev, bio: bioInput }));
+      setUserData((prev) => (prev ? { ...prev, bio: bioInput } : prev));
       setIsBioOpen(false);
     }
   };
@@ -36,7 +44,7 @@ const Modal2 = () => {
     if (userData?.uid) {
       const userDocRef = doc(db, "users", userData.uid);
       await updateDoc(userDocRef, { link: linkInput });
-      setUserData((prev: any) => ({ ...prev, link: linkInput }));
+      setUserData((prev) => (prev ? { ...prev, link: linkInput } : prev));
       setIsLinkOpen(false);
     }
   };
@@ -45,7 +53,7 @@ const Modal2 = () => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
         await fetchUserData(user.uid);
-        setUserData((prev: any) => ({ ...prev, uid: user.uid }));
+        setUserData((prev) => (prev ? { ...prev, uid: user.uid } : null));
       }
     });
     return () => unsubscribe();
@@ -54,6 +62,8 @@ const Modal2 = () => {
   const closeModal = (e: MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
       setIsOpen(false);
+      {
+      }
     }
   };
 
@@ -117,7 +127,7 @@ const Modal2 = () => {
                       </h1>
                       <button
                         onClick={() => {
-                          setBioInput(userData.bio || "");
+                          setBioInput(userData?.bio || "");
                           setIsBioOpen(true);
                         }}
                         className="w-[90px] h-[40px] mb-4 rounded-[13px] border border-gray-400 text-base font-semibold "

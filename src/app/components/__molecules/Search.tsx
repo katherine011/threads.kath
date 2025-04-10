@@ -15,12 +15,19 @@ import { db } from "@/app/firebaseConfig";
 import Default from "../../../images/default.png";
 import Image from "next/image";
 
+interface User {
+  id: string;
+  name: string;
+  username: string;
+  image?: string;
+}
+
 const Search = () => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState("");
-  const [users, setUsers] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [debouncedQuery, setDebouncedQuery] = useState<string>("");
+  const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -63,13 +70,20 @@ const Search = () => {
         );
 
         const querySnapshot = await getDocs(q);
-        const usersData = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
+
+        const usersData: User[] = querySnapshot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            id: doc.id,
+            name: data.name,
+            username: data.username,
+            image: data.profileImage || data.image || undefined,
+          };
+        });
 
         setUsers(usersData);
-      } catch (err: any) {
+      } catch (err) {
+        console.error("Error fetching users:", err);
         setError("მომხმარებლები ვერ მოიძებნა");
       } finally {
         setLoading(false);
@@ -96,10 +110,11 @@ const Search = () => {
         onChange={handleSearch}
         className="w-full p-2 outline-[1px] outline-zinc-300 border-[1px] border-gray-300 rounded-[15px]"
       />
+
       <ul className="mt-4">
         {loading && <p>Searching...</p>}
         {error && <p className="text-red-600">{error}</p>}
-        {users.map((user: any) => (
+        {users.map((user) => (
           <li
             key={user.id}
             onClick={() => handleUserClick(user.username)}
@@ -108,11 +123,13 @@ const Search = () => {
             <Image
               src={user.image || Default}
               alt={user.name}
+              width={40}
+              height={40}
               className="w-10 h-10 rounded-full object-cover"
             />
             <div>
               <p className="font-medium text-gray-800">{user.name}</p>
-              <p className="text-sm text-gray-500">{user.username}</p>
+              <p className="text-sm text-gray-500">@{user.username}</p>
             </div>
           </li>
         ))}

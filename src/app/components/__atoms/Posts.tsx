@@ -1,35 +1,27 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddPosts from "../__molecules/AddPosts";
 import Image from "next/image";
-import { doc, getDoc } from "firebase/firestore";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "@/app/firebaseConfig";
 import DefaultImage from "../../../images/default.png";
 
 const Posts = () => {
-  const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [userData, setUserData] = useState<{
-    name: string;
-    username: string;
-  } | null>(null);
-  const modalRef = useRef<HTMLDivElement>(null);
+  const [imageUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        const userDocRef = doc(db, "users", user.uid);
-        const docSnap = await getDoc(userDocRef);
-        if (docSnap.exists()) {
-          setUserData({
-            name: docSnap.data().name,
-            username: docSnap.data().username,
-          });
-          setImageUrl(docSnap.data().profileImage || DefaultImage.src);
-        }
-      }
-    });
+    // const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    //   if (user) {
+    //     const userDocRef = doc(db, "users", user.uid);
+    //     const docSnap = await getDoc(userDocRef);
+    //     if (docSnap.exists()) {
+    //       setUserData({
+    //         name: docSnap.data().name,
+    //         username: docSnap.data().username,
+    //       });
+    //       setImageUrl(docSnap.data().profileImage || DefaultImage.src);
+    //     }
+    //   }
+    // });
   }, []);
   return (
     <div className="z-10">
@@ -42,14 +34,14 @@ const Posts = () => {
             height={120}
             className="w-[50px] h-[50px] rounded-full"
           />
-          <p className="text-gray-400 font-inter text-sm mt-2">What's new?</p>
+          <p className="text-gray-400 font-inter text-sm mt-2">Whats new?</p>
           <AddPosts />
         </div>
         <button className="border-gray-300  border-[1px] w-[70px] h-[35px] rounded-[12px] hover:w-[72px] hover:h-[37px] ease-in-out bg-white">
           <h1 className="text-[#000000] text-inter text-base font-semibold">
             Post
-            <AddPosts />
           </h1>
+          <AddPosts />
         </button>
       </div>
     </div>

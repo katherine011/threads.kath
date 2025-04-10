@@ -9,7 +9,6 @@ import DefaultImage from "../../../images/default.png";
 import Add from "../../../icons/add.png";
 import Trash from "../../../icons/trash.png";
 
-const API_KEY = "YOUR_IMGBB_API_KEY";
 const uploadImageToImgBB = async (file: File) => {
   const formData = new FormData();
   formData.append("image", file);

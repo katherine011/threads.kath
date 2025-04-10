@@ -6,7 +6,7 @@ import Image from "next/image";
 import More from "../../../icons/more.png";
 import { auth, db } from "@/app/firebaseConfig";
 import { doc, getDoc, addDoc, collection, Timestamp } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+// import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { onAuthStateChanged } from "firebase/auth";
 import Img from "../../../icons/img.png";
 import GIF from "../../../icons/GIF.png";
@@ -62,18 +62,18 @@ const AddPosts = () => {
     };
   }, []);
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setLoading(true);
-      const storage = getStorage();
-      const storageRef = ref(storage, "posts/" + file.name);
-      await uploadBytes(storageRef, file);
-      const url = await getDownloadURL(storageRef);
-      setUploadedImageUrl(url);
-      setLoading(false);
-    }
-  };
+  // const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = e.target.files?.[0];
+  //   if (file) {
+  //     setLoading(true);
+  //     const storage = getStorage();
+  //     const storageRef = ref(storage, "posts/" + file.name);
+  //     await uploadBytes(storageRef, file);
+  //     const url = await getDownloadURL(storageRef);
+  //     setUploadedImageUrl(url);
+  //     setLoading(false);
+  //   }
+  // };
 
   const handlePost = async () => {
     if (!postText.trim() || !userData) return;
@@ -122,10 +122,10 @@ const AddPosts = () => {
 
       {isModalOpen && (
         <>
-          <div className="w-[2175px] z-20 h-[1571px] absolute bg-[#000000b0] left-[-800px] top-[-900px] "></div>
+          <div className="w-[2313px] z-20 h-[1640px] absolute bg-[#000000b0] left-[-800px] top-[-900px] "></div>
           <div
             ref={modalRef}
-            className="w-[580px] h-[250px] rounded-[16px] z-30 flex flex-col absolute top-56 left-[400px] bg-white border-gray-300 border-[1px]"
+            className="w-[580px] h-[250px] rounded-[16px] z-30 flex flex-col absolute top-56 left-[465px] bg-white border-gray-300 border-[1px]"
           >
             <div className="rounded-t-3xl w-[100%] z-30 bg-white h-[60px] p-5 border-b cursor-pointer border-gray-300 flex flex-row items-center justify-between">
               <button
@@ -137,7 +137,7 @@ const AddPosts = () => {
 
               {isOpen && (
                 <>
-                  <div className="w-[1774px] z-20 h-[1347px] absolute bg-[#0000006f] left-[-800px] top-[-900px] "></div>
+                  <div className="w-[1846px] z-20 h-[1447px] absolute bg-[#0000006f] left-[-800px] top-[-900px] "></div>
                   <div
                     ref={modalRef}
                     className="absolute left-[170px] z-30 top-[50px] w-[260px] h-[170px] rounded-xl text-center justify-center bg-white shadow-md border border-gray-300"

@@ -1,17 +1,17 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import LogoutButton from "../LogOut";
 
 const MoreSett = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [setIsModalOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const closeModal = (event: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-      setIsModalOpen(false);
-    }
-  };
+  // const closeModal = (event: MouseEvent) => {
+  //   if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+  //     setIsModalOpen(false);
+  //   }
+  // };
 
   return (
     <div

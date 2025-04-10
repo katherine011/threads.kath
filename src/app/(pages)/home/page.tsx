@@ -1,6 +1,5 @@
 import Border from "@/app/components/__atoms/Borders/Border";
 import Posts from "@/app/components/__atoms/Posts";
-import AddPosts from "@/app/components/__molecules/AddPosts";
 import PostsList from "@/app/components/__molecules/PostList";
 import React from "react";
 
