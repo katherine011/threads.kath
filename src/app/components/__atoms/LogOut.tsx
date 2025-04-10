@@ -7,36 +7,36 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Thread from "../../../icons/Threads.ic.png";
 const LogoutButton = () => {
-  const [isClient, setIsClient] = useState(false); // State to check if it's client-side rendering
-  const [loading, setLoading] = useState(false); // Loading state to manage logout loading
-  const router = useRouter(); // useRouter for navigation
+  const [isClient, setIsClient] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    setIsClient(true); // Set client-side flag when component mounts
+    setIsClient(true);
   }, []);
 
   const handleLogout = async () => {
     try {
-      setLoading(true); // Set loading to true when logout starts
-      await signOut(auth); // Sign out user
+      setLoading(true);
+      await signOut(auth);
       console.log("Logged out successfully");
-      router.push("/login"); // Redirect to login page after successful logout
+      router.push("/login");
     } catch (error) {
       console.error("Error logging out:", error);
     } finally {
-      setLoading(false); // Reset loading state after logout completes
+      setLoading(false);
     }
   };
 
   if (!isClient) {
-    return null; // Don't render until client-side is ready
+    return null;
   }
 
   return (
     <button
       onClick={handleLogout}
       className="w-[130px] text-red-700 h-[50px] p-3 rounded-[11px] text-base font-bold font-inter hover:bg-gray-200"
-      disabled={loading} // Disable button while loading
+      disabled={loading}
     >
       {loading ? (
         <div className="w-[100%] left-0 top-0 a h-[100vh] bg-white rounded-t-3xl border shadow-md border-gray-300 outline-[2px] absolute flex items-center justify-center ">

@@ -84,7 +84,7 @@ const Search = () => {
   };
 
   const handleUserClick = (username: string) => {
-    router.push(`/userprofile?username=${username}`); // აქ ხდება გადაცემა
+    router.push(`/userprofile?username=${username}`);
   };
 
   return (

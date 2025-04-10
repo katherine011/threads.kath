@@ -6,6 +6,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDocs,
   onSnapshot,
   orderBy,
   query,
@@ -15,9 +16,9 @@ import {
   getDoc,
 } from "firebase/firestore";
 import Image from "next/image";
-import More from "../../../icons/more.png";
-import Comment from "../../../icons/comment.png";
-import DefaultImage from "../../../images/default.png";
+import More from "../../../../icons/more.png";
+import Comment from "../../../../icons/comment.png";
+import DefaultImage from "../../../../images/default.png";
 import { onAuthStateChanged } from "firebase/auth";
 
 interface Post {
@@ -34,7 +35,7 @@ interface Post {
   comments?: { user: string; commentText: string; createdAt: any }[];
 }
 
-const PostsList = () => {
+const ProfilePosts = () => {
   const [posts, setPosts] = useState<Post[]>([]);
   const [openPostId, setOpenPostId] = useState<string | null>(null);
   const [commentText, setCommentText] = useState<string>("");
@@ -55,6 +56,26 @@ const PostsList = () => {
     name: string;
     username: string;
   } | null>(null);
+
+  const user = auth.currentUser;
+
+  useEffect(() => {
+    const q = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const postsData = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      })) as Post[];
+
+      // ფილტრაცია: მხოლოდ შენი პოსტები
+      const userPosts = postsData.filter(
+        (post) => post.author.username === user?.displayName
+      );
+      setPosts(userPosts); // მხოლოდ შენი პოსტები
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -391,4 +412,4 @@ const PostsList = () => {
   );
 };
 
-export default PostsList;
+export default ProfilePosts;

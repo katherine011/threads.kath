@@ -5,8 +5,8 @@ import { onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import ProfPic from "./ProfPic";
 import Thread from "../../../../icons/Threads.ic.png";
+import UploadPage from "../UploadPage";
 
 const ProfileHeader = () => {
   const [userData, setUserData] = useState<any>(null);
@@ -74,7 +74,7 @@ const ProfileHeader = () => {
               </div>
             </div>
             <div>
-              <ProfPic />
+              <UploadPage />
             </div>
           </div>
         </>
